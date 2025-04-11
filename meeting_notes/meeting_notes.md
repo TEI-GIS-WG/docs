@@ -1,5 +1,44 @@
 # TEI-GS WG Meeting Notes
 
+## 2025-04-11
+
+**Attending**: JT, MH
+
+### Summary
+The main idea is that there are three things that need to be specified: the `@standard`, the`@version` of that standard, and the level/object/granularity at which you're using that standard. (Also encourage `@ref` to point at a formal standard, if not defined.) 
+
+We need to think about what to name this to make it clear that this attribute is defining the formal name of the container as defined in the standard. In the case of XML content, perhaps there is no need to specify the container if there's a single root element, since you can just include the complete element, but if the content of `<geo>` is a fragment, then a container should be specified. If it's a JSON structure, then not including a level implies that the content is a complete self-defining object complying with the standard in `@standard`.
+
+Overall, we are currently thinking:
+
+* Create a class of attributes for declaring and defining the use of geographic standards
+* Update or create a new element for declaring and defining the use of a standard (either repurposing `<geoDecl>` or create a `<geoDef>`)
+* Retain `<geo>` and do not create a new element (to allow for backwards compatibility)
+
+### Agenda
+
+* Discussing survey results and recapping discussion from most recent TEI community call
+* We need to determine whether we create a new element (called geometry) or significantly change the existing geo element
+* What is it that we're trying to constrain and should we be trying to implement rules based on scheme?
+    * If your `@scheme` is GML, must have an element in the GML namespace?
+    * If you `@scheme` is KML, must be namespace?
+* But question emerges of at what level people can embed information: e.g. with GeoJSON, would you start at a key (e.g. "geometry" or actually valid JSON)?
+* We need a mechanism that enables to say exactly what you're doing and how
+   * You need to be able to specify a level (a `@level` or some such)
+   * Attributes like scheme and schemeVersion, but redefined with (open?) list of which geoDef and geo have. 
+   * Some examples of what this might look like (recognizing that the attribute names and such are all still in flux)
+    ```xml
+     <geoDef geoScheme="WKT" level="POINT"/> <!--two coordinates will do-->
+     <geoDef geoScheme="GeoJSON" level="geometry">
+         <desc><!--Any particular description that one would
+               want to provide about what this definition means
+               in the context of their project--></desc>
+      </geoDef>
+    ```
+* Also discussing potential contribution for TEI2025 (due near end of April):
+    * Decided on proposing a short paper outlining the problem and our potential solution. JT to draft. 
+* Will schedule next meeting of WG to be held within next few weeks to finalize short paper submission.
+
 ## 2025-01-24
 
 **Attending**: JT, MH, GR
