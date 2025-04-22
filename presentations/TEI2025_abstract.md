@@ -1,4 +1,4 @@
-This presentation will share the current state of the TEI's GIS Working Group, work, outlining the group's objectives, 
+This presentation will share the current state of the TEI's GIS Working Group work, outlining the group's objectives, 
 current recommendations, and the rationale behind them. Created in November 2024, the GIS Working Group (GIS-WG) was charged with
 proposing modifications to the TEI schema to support more detailed,
 granular, and standards-based methods of encoding geospatial data in
