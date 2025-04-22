@@ -1,24 +1,20 @@
-The GIS working group, created in November 2024, was charged with
+This presentation will share the current state of the TEI's GIS Working Group, work, outlining the group's objectives, 
+current recommendations, and the rationale behind them. Created in November 2024, the GIS Working Group (GIS-WG) was charged with
 proposing modifications to the TEI schema to support more detailed,
-granular, and standards-based methods of encoding GIS information in
+granular, and standards-based methods of encoding geospatial data in
 TEI, along with corresponding updates to the Guidelines prose (the full
 charge is available at
 https://tei-c.org/activities/workgroups/gis-charge/).
 
-Early in 2025, we devised a survey on current practices and preferences,
+The group has made good progress so far. Early in 2025, we devised a survey on current practices and preferences,
 which was completed by a number of community members particularly
-interested in this topic. Based on the survey, we have developed a
-proposal for schema modifications allowing support for GeoJSON, WKT,
-GML, KML, and other standards within TEI encoding. Our objective has
-been to allow encoding patterns which are sufficiently flexible to
-support any of the widely-used standards, while applying constraints
-which allow for robust interchange. We also need to avoid breaking
-backwards-compatibility for those already working with GIS in TEI.
+interested in this topic. We have also received feedback and discussion from the community during the March TEI Community Call. 
 
-We propose adding a new element, `<geoDef>`, in the TEI header, along
-with two attributes, `@geoScheme` and `@level`; we would also add
-`@scheme` to the existing `<geo>` element, so that element can point
-directly to a `<geoDef>`. The two new attributes would also be available
-on `<geo>` itself, for cases where it is more convenient simply to
-supply them there. `<geo>` itself would be modified to allow content in
-any of the supported GIS standard languages.
+Drawing on this feedback and informed by existing practices, the GIS-WG has developed a proposal for schema modifications allowing support for GeoJSON, WKT,
+GML, KML, and other standards within TEI encoding. We have sought to ensure that these proposed changes are backwards compatible, sufficiently flexible to
+support widely-used standards, and appropriately constrained to facilitate robust interchange. We propose expanding `<geo>` to allow content in any
+of the supported geographic standards as well as adding a set of attributes to allow encoders to define clearly the encoding scheme 
+used to describe the geometry contained. We also propose adding a new element, `<geoDef>,` to allow for centralized definitions of geographic schemes to which a `<geo>` refers.
+
+
+
