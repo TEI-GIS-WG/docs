@@ -11,8 +11,9 @@ which was completed by a number of community members particularly interested in 
 support widely-used standards,  appropriately constrained to facilitate robust interchange, and backwards compatible with existing practices. 
 
 In our short paper, we will share our current thinking and proposed modifications. We propose expanding `<geo>` to allow content in any
-of the supported geographic standards as well as adding a set of attributes that allow encoders to define clearly the encoding scheme 
-used to describe geospatial information. We also propose adding a new element, `<geoDef>,` to allow for centralized definitions of geographic schemes to which a `<geo>` may refer. 
+of the supported geographic standards and creating a new element, `<geoDef>,` to allow for centralized definitions of geographic schemes. These two elements will both be members of a new class of attributes, which will specify the encoding scheme used, its version, and, to promote interchange, the level at which the geographic scheme is being implemented. 
+
+
 
 
 
