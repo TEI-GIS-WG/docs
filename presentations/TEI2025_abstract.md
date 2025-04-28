@@ -1,3 +1,9 @@
+---
+title: Dispatches from the TEI's GIS Working Group
+---
+
+# Dispatches from the TEI's GIS Working Group
+
 Created in November 2024, the GIS Working Group (GIS-WG) was charged by the TEI Technical Council with proposing modifications to the TEI schema to support more detailed, granular, and standards-based methods of encoding geospatial data in TEI, along with corresponding updates to the Guidelines prose. The full charge is available at https://tei-c.org/activities/workgroups/gis-charge/. 
 
 This presentation will share the current state of the GIS-WG's work, outlining the group's objectives, current recommendations, and the rationale behind them. Early in 2025, we devised a survey on current practices and preferences, which was completed by a number of community members particularly interested in this topic. We have also received feedback and discussion from the community during the March TEI Community Call. 
