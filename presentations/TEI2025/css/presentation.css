@@ -3,29 +3,6 @@
 @import "../js/reveal/theme/black.css";
 @import "../js/reveal/plugin/highlight/monokai.css";
 
-@font-face {
-  font-family: "Oswald";
-  src: url("Oswald/Oswald-VariableFont_wght.ttf") format("truetype-variations");
-  font-weight: 1 999;
-}
-
-@font-face {
-  font-family: "CooperHewitt";
-  src: url("CooperHewitt/CooperHewitt-Bold.woff") format("woff");
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: "CooperHewitt";
-  src: url("CooperHewitt/CooperHewitt-Book.woff") format("woff");
-}
-
-@font-face {
-  font-family: "CooperHewitt";
-  src: url("CooperHewitt/CooperHewitt-BookItalic.woff") format("woff");
-  font-style: italic;
-}
-
 :root {
   --main-font: Inter, Helvetica, sans-serif;
   --r-heading-font: Inter, Helvetica, sans-serif;
