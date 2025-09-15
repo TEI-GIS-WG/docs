@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Dispatches from the TEI's GIS Working Group</title>
+        <meta charset="utf-8" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet" href="./css/presentation.css" />
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css" />
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+                <section class="title-slide slide">
+                    <h2 class="maintitle">Dispatches from the TEI's GIS Working Group</h2>
+                    <hr />
+                    <footer class="r-fit-text">
+                        <p>Joey Takeda, Martin Holmes</p>
+                        <p>TEI Annual Meeting, Kraków, September 18, 2025</p>
+                        <p></p>
+                    </footer>
+                </section>
+
+                <section>
+                    <div class="r-fit-text">
+                     <blockquote>
+                        <p>The overall objective of the GIS Working Group is to provide standards-informed mechanisms that are at least interchangeable, if not interoperable, for encoding geographic information in TEI that are capable of unambiguous interpretation and transformation to and from standard GIS file formats.</p>
+                    </blockquote>
+                    </div>
+                </section>
+
+                <section>
+                    <h2>How do people encode geographic information in TEI?</h2>
+                    <ul class="fragmented">
+                        <li>We ran a survey asking about it</li>
+                        <li>We looked through GitHub (searching for <kbd>"&lt;geo"</kbd>)</li>
+                        <li>We asked ChatGPT</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <ul class="fragmented">
+                        <li>It's all over the map</li>
+                        <li>By and large, lat lon (with space separation); there's evidence from code for processing that this is also what people expect</li>
+                        <li>Little evidence of people using GeoJSON or other complex features within TEI <code>&lt;geo&gt;</code>. Some, like REED, has mapping information as standoff, non-TEI</li>
+                        <li>Lots of people doing maps, but they don't seem to use TEI / if they use TEI, they reserve TEI for the texts, and use something else for the maps</li>
+                    </ul>
+                </section>
+
+                <section>
+<pre>
+<code class="language-xml">
+<script type="text/template">
+<location>
+  <geo>"geometry": {"type":"Point","coordinates":[-123.31142,48.46206]}</geo>
+</location>
+
+</script>
+</code>
+</pre>
+</section>
+               
+                <section>
+<pre>
+<code class="language-xml">
+<script type="text/template">
+   <feature xml:id="id-1590" type="Point">
+    {"type": "Feature", 
+        "properties": 
+            {"name": "Unicorn Inn", "place_type": "victualling-house",
+             "is_approximate": false, "placeholder_coordinates": null,
+             "container": 643, "patrons_label_flag": 2,
+             "symbol_flag": 2, "notes": "", "pk": "1590",
+             "eats_name": "<eats_name/>",
+             "eats_url": "<eats_url/>", 
+             "record_title": "<record_title/>",
+             "record_url": "<record_url/>"
+            },
+              "geometry": 
+                {"type": "Point", 
+                "coordinates": [-0.09608543233336715, 51.508231858257766]
+                }
+    }
+    </feature>
+
+</script>
+</code>
+</pre>
+<!--REEED-->
+</section>
+
+<section>
+<pre>
+<code class="language-xml">
+<script type="text/template">
+ <location>
+    <address>
+        <addrLine>Postal address (optional)</addrLine>
+        <country ref="ISO 3166-1" cert="high">Three letter code for country, picked from dropdown</country>
+        <region cert="high">Region name</region>
+        <addrLine/>
+    </address>
+    <geo decls="#WGS">53.226658 -0.541254</geo>
+</location>
+</script>
+</code>
+</pre>
+</section>
+
+<section>
+    <pre>
+        <code class="language-xml">
+            <script type="text/template">
+<provenance type="found">
+    <placeName
+        type="findspot" 
+        subtype="pleiades"
+        ref="http://pleiades.stoa.org/places/89196">Habitancum</placeName>
+    <!-- Risingham not in GeoNames as of Feb. 2013 -->
+    <date type="foundDate" when="1849">1849 (mostly)</date>
+    <location type="findspot" precision="low" cert="low"
+        source="Provisional">
+        <geo decls="#WGS">55.170121 -2.17376</geo>
+        <geo decls="#OS">NY 89030 86215</geo>
+    </location>
+    <p>In the <rs>Headquarters Building</rs> at 
+        <placeName key="db01578">Risingham</placeName>.</p>
+</provenance>
+
+<!-- Later in file -->
+
+<geoDecl xml:id="WGS" datum="WGS84">World Geodetic System</geoDecl>
+<geoDecl xml:id="OS" datum="OSGB36">Ordnance Survey</geoDecl>
+            </script>
+        </code>
+    </pre>
+</section>
+
+<section>
+    <h2>Our (Modest) Proposal</h2>
+    <ul class="fragmented">
+      <li>Update <code class="gi">geoDecl</code> and adding <code class="att">scheme</code> to allow for various kinds of encoding (e.g. embedding GML, embedding GeoJSON etc)</li>
+      <li></li>
+    </ul>
+</section>
+
+<section>
+    <h2><code class="gi">geoDecl</code></h2>
+    <ul class="fragmented">
+        <li>Defines the standard used and any additional definitions to remove ambiguity as to the use of the standard (or if there are multiple different definitions of CRSs)
+    </ul>
+</section>
+
+<section>
+    <h2><code class="att">scheme</code></h2>
+    <p class="fragment">Denotes the scheme/standard being used</p>
+    <p class="fragment">Optional on <code class="gi">geo</code>; mandatory on <code class="gi">geoDecl</code></p>
+    <pre class=fragment">
+        <code class="language-xml">
+            <script type="text/template">
+<valList type="semi">
+   <valItem>GeoJSON</valItem>
+   <valItem>GML</valItem>
+   <valItem>KML</valItem>
+   <valItem>WKT</valItem>
+   <valItem>LatLong</valItem><!-- OLD TEI - to be deprecated. -->
+</valList>
+            </script>
+        </code>
+    </pre>
+</section>
+<section>
+    <h2><code class="att">scheme</code></h2>
+    <ul class="fragmented">
+        <li>Overall, the principle for all established schemes is that the content of the <code class="gi">geo</code> should represent a valid object as defined by that scheme.</li>
+        <li>If the content of <code class="gi">geo</code> is in an XML language, it must have a single root element; fragments are not allowed.</li>
+    </ul>
+</section>
+<section>
+    <pre>
+        <code class="language-xml">
+            <script type="text/template">
+<geo scheme="GeoJSON">
+   {
+    "type": "Point",
+    "coordinates": [
+      2.889957,
+      50.687328
+    ]
+   }
+</geo>
+            </script>
+        </code>
+    </pre>
+</section>
+    
+</div>
+</div>
+        <script src="js/presentation.js" type="module"></script>
+    </body>
+</html>
