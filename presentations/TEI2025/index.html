@@ -37,6 +37,26 @@
                 </section>
 
                 <section>
+                    <h2>Current State of Things</h2>
+                    <ul class="fragmented">
+                        <li><code class="gi">geo</code>: allows for <code>lat lon</code></li>
+                        <li><code class="gi">geoDecl</code>: documents the notation and the datum used for geographic coordinates expressed as content of the geo element</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Assumptions</h2>
+                    <ul class="fragment">
+                        <li>People like maps and want to encode geographic coordinates</li>
+                        <li>People want to be able to express this in their TEI files</li>
+                        <li>People have done so (kind of)</li>
+                        <li>Places are not just points</li>
+                        <li>We are not all geographers</li>
+                        <li>But geographers exist, and have thought a lot about this</li>
+                    </ul>
+                </section>
+
+                <section>
                     <h2>How do people encode geographic information in TEI?</h2>
                     <ul class="fragmented">
                         <li>We ran a survey asking about it</li>
@@ -49,54 +69,12 @@
                     <ul class="fragmented">
                         <li>It's all over the map</li>
                         <li>By and large, lat lon (with space separation); there's evidence from code for processing that this is also what people expect</li>
-                        <li>Little evidence of people using GeoJSON or other complex features within TEI <code>&lt;geo&gt;</code>. Some, like REED, has mapping information as standoff, non-TEI</li>
                         <li>Lots of people doing maps, but they don't seem to use TEI / if they use TEI, they reserve TEI for the texts, and use something else for the maps</li>
                     </ul>
                 </section>
 
+
                 <section>
-<pre>
-<code class="language-xml">
-<script type="text/template">
-<location>
-  <geo>"geometry": {"type":"Point","coordinates":[-123.31142,48.46206]}</geo>
-</location>
-
-</script>
-</code>
-</pre>
-</section>
-               
-                <section>
-<pre>
-<code class="language-xml">
-<script type="text/template">
-   <feature xml:id="id-1590" type="Point">
-    {"type": "Feature", 
-        "properties": 
-            {"name": "Unicorn Inn", "place_type": "victualling-house",
-             "is_approximate": false, "placeholder_coordinates": null,
-             "container": 643, "patrons_label_flag": 2,
-             "symbol_flag": 2, "notes": "", "pk": "1590",
-             "eats_name": "<eats_name/>",
-             "eats_url": "<eats_url/>", 
-             "record_title": "<record_title/>",
-             "record_url": "<record_url/>"
-            },
-              "geometry": 
-                {"type": "Point", 
-                "coordinates": [-0.09608543233336715, 51.508231858257766]
-                }
-    }
-    </feature>
-
-</script>
-</code>
-</pre>
-<!--REEED-->
-</section>
-
-<section>
 <pre>
 <code class="language-xml">
 <script type="text/template">
@@ -143,11 +121,27 @@
     </pre>
 </section>
 
+                <section>
+<pre>
+<code class="language-xml">
+<script type="text/template">
+<location>
+  <geo>"geometry": {"type":"Point","coordinates":[-123.31142,48.46206]}</geo>
+</location>
+
+</script>
+</code>
+</pre>
+</section>
+               
+
+
+
 <section>
     <h2>Our (Modest) Proposal</h2>
     <ul class="fragmented">
-      <li>Update <code class="gi">geoDecl</code> and adding <code class="att">scheme</code> to allow for various kinds of encoding (e.g. embedding GML, embedding GeoJSON etc)</li>
-      <li></li>
+      <li>Update <code class="gi">geoDecl</code></li>
+      <li>Create (or add) <code class="att">scheme</code> to <code class="gi">geo</code> and <code class="gi">geoDecl</code> to allow for various kinds of encoding (e.g. embedding GML, embedding GeoJSON etc)</li>
     </ul>
 </section>
 
@@ -155,6 +149,14 @@
     <h2><code class="gi">geoDecl</code></h2>
     <ul class="fragmented">
         <li>Defines the standard used and any additional definitions to remove ambiguity as to the use of the standard (or if there are multiple different definitions of CRSs)
+    </ul>
+</section>
+
+<section>
+    <h2><code class="att">scheme</code></h2>
+    <ul class="fragmented">
+        <li>Overall, the principle for all established schemes is that the content of the <code class="gi">geo</code> should represent a valid object as defined by that scheme.</li>
+        <li>If the content of <code class="gi">geo</code> is in an XML language, it must have a single root element; fragments are not allowed.</li>
     </ul>
 </section>
 
@@ -176,13 +178,7 @@
         </code>
     </pre>
 </section>
-<section>
-    <h2><code class="att">scheme</code></h2>
-    <ul class="fragmented">
-        <li>Overall, the principle for all established schemes is that the content of the <code class="gi">geo</code> should represent a valid object as defined by that scheme.</li>
-        <li>If the content of <code class="gi">geo</code> is in an XML language, it must have a single root element; fragments are not allowed.</li>
-    </ul>
-</section>
+
 <section>
     <pre>
         <code class="language-xml">
@@ -200,6 +196,22 @@
         </code>
     </pre>
 </section>
+
+<section>
+    <ul class="fragmented">
+        <li>This is likely the right approach – something fairly lightweight but expressive and clear. However, we see this as a bit of a first step or entry point into a larger set of questions regarding the way that we describe 2D spaces in TEI:</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Current questions:</h2>
+    <ul class="fragmented">
+        <li>Is it right to keep surface/zones completely separate from geo (i.e. allowing them to develop in parallel)? Should we be more ambitious in our thinking with 2D coordinate spaces and how we describe them in TEI?</li>
+        <li>In other words, should <span class="gi">geo</span> still be "geography" or should it be "geometry"?</li>
+    </ul>
+</section>
+
+
     
 </div>
 </div>
